@@ -1,8 +1,7 @@
 ## 記得低調哈哈哈
 ### 筆記放在<span class="color:yellow">Matlab筆記</span>＜－這個資料夾裡面  
-> 目前只有CH1 ~ CH13 有空ㄉ可以幫大家做ㄛ 😆
+> 目前只有CH3 ~ CH13 有空可以幫忙做ㄛ 😆
 
-* Chapter2 **結構陣列**
 * Chapter3 **二維平面繪圖**
 * Chapter4 **三維立體繪圖**
 * Chapter5 **特殊圖形**
