@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ebb4c41cc6e6d75b930f27fcae8df310862939f
 ### 筆記放在<span class="color:yellow">Matlab筆記</span>＜－這個資料夾裡面  
 > 目前只有CH3 ~ CH13 有空可以幫忙做ㄛ 😆
 
