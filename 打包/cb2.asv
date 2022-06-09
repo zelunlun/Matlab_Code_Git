@@ -1,0 +1,19 @@
+% Cb2
+% 取得第二個控制物件的數值
+pointNum = round(str2num(get(h2, 'string')));
+% 若數字太大或太小，則設定為10
+if pointNum <= 1 || pointNum > 100
+    pointNum = 10;
+    set(h2, 'string', pointNum);
+end
+ 
+% 根據所得數字，重畫peaks曲面
+[xx, yy, zz] = peaks(int2str(pointNum);
+surf(xx, yy, zz);
+axis tight;
+ 
+% 根據第一個UI控制物件，決定是否要畫格線
+%if  get(h1, 'value') == 1
+%    grid on;
+%else
+%    grid off;
