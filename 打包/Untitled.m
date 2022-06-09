@@ -15,12 +15,15 @@ pointNum = 20;
 title1 = '初始';
 label_x = 'x座標'
 [xx, yy, zz] = peaks(pointNum);
-h = surf(xx, yy, zz);
+surf(xx, yy, zz);
 %surfc(xx, yy, zz);
 colormap hsv
 
 axis tight
-  
+
+h = uicontrol('style', 'checkbox', 'string', 'mesh', ...
+	'position', [10, 40, 60, 20], 'value', 0);
+
 % 第一個UI控制物件，用以控制背景格線的顯示。
 h1 = uicontrol('style', 'checkbox', 'string', 'surf on', ...
 	'position', [10, 10, 60, 20], 'value', 0);
@@ -42,7 +45,7 @@ h6 = uicontrol('style', 'edit', 'string', label_x, ...
 	'position', [400, 10, 60, 20]);
 
 % 第一個UI控制物件的反應指令為「grid」。
-
+set(h , 'callback', 'cb');
 set(h1, 'callback', 'cb1');
 % 第二個UI控制物件的反應指令為「cb2」。
 set(h2, 'callback', 'cb2');
