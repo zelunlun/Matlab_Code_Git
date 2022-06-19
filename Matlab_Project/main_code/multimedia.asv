@@ -96,9 +96,9 @@ fclose(fid);
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
-        Data = Data(11,1);
+        Data = Data(1,11);
     case 3
-        Data = Data(11,2);
+        Data = Data(2,11);
 end
 handles.Data1 = Data;
 guidata(hObject, handles);  % Store updated handles struct in the GUI
