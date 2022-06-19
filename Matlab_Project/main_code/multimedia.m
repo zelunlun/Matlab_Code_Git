@@ -22,7 +22,7 @@ function varargout = multimedia(varargin)
 
 % Edit the above text to modify the response to help multimedia
 
-% Last Modified by GUIDE v2.5 16-Jun-2022 15:12:08
+% Last Modified by GUIDE v2.5 19-Jun-2022 21:43:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -81,7 +81,19 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from popupmenu1
-
+[filename, pathname] = uigetfile({'*.txt'},'File Selector');
+if ~ischar(filename)
+    return;  % User aborted the file selection
+end
+file = fullfile(pathname, filename);
+[fid, msg] = fopen(file, 'r');
+if fid == -1
+    error(msg);
+end
+Data = fscanf(fid, '%g %g\n', [2, inf]);  % Or how your file is formatted
+fclose(fid);
+handles.Data = Data;
+guidata(hObject, handles);  % Store updated handles struct in the GUI
 
 % --- Executes during object creation, after setting all properties.
 function popupmenu1_CreateFcn(hObject, eventdata, handles)
@@ -156,3 +168,5 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+Data = handles.Data;
+pie3(handles.axes1, Data);
