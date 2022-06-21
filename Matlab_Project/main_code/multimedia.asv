@@ -22,7 +22,7 @@ function varargout = multimedia(varargin)
 
 % Edit the above text to modify the response to help multimedia
 
-% Last Modified by GUIDE v2.5 19-Jun-2022 21:43:27
+% Last Modified by GUIDE v2.5 21-Jun-2022 18:17:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,51 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for multimedia
 handles.output = hObject;
-
+handles.axes1 = set(handles.axes1,'visible','off');
+handles.axes2 = set(handles.axes2,'visible','off');
+handles.axes3 = set(handles.axes3,'visible','off');
+handles.TeamName = {'Memphis Grizzlies',...
+'Golden State Warriors',...
+'Denver Nuggets',...
+'New Orleans Pelicans',...
+'Minnesota Timberwolves',...
+'Brooklyn Nets',...
+'Phoenix Suns',...
+'Dallas Mavericks',...
+'Boston Celtics',...
+'Philadelphia 76ers',...
+'Miami Heat',...
+'Toronto Raptors',...
+'Milwaukee Bucks',...
+'Utah Jazz',...
+'Atlanta Hawks',...
+'Chicago Bulls',...
+'League Average'...
+};
+handles.TypeName = {'Games(上場數)',...
+'Minutes Played(上場時間)',...
+'Field Goals(投籃數)',...
+'Field Goal Attempts(投籃出手數)',...
+'Field Goal Percentage(投籃命中率)',...
+'3-Point Field Goals(三分投射)',...
+'3-Point Field Goal Attempts(三分球出手數)',...
+'3-Point Field Goal Percentage(三分球命中率)',...
+'2-Point Field Goals(二分投射)',...
+'2-point Field Goal Attempts(二分球出手數)',...
+'2-Point Field Goal Percentage(二分球命中率)',...
+'Free Throws(罰球)',...
+'Free Throw Attempts(罰球出手數)',...
+'Free Throw Percentage(罰球命中率)',...
+'Offensive Rebounds(攻進籃板球)',...
+'Defensive Rebounds(防守籃板球)',...
+'Total Rebounds(籃板球總數)',...
+'Assists(助攻)',...
+'Steals(抄截)',...
+'Blocks(蓋火鍋)',...
+'Turnovers(失誤)',...
+'Personal Fouls(個人犯規)',...
+'Points(得分)'...
+};
 % Update handles structure
 guidata(hObject, handles);
 
@@ -96,9 +140,41 @@ fclose(fid);
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
-        Data = Data(1,11);
+        Data = Data(:,1);
     case 3
-        Data = Data(2,11);
+        Data = Data(:,2);
+    case 4
+        Data = Data(:,3);
+    case 5
+        Data = Data(:,4);
+    case 6
+        Data = Data(:,5);
+    case 7
+        Data = Data(:,6);
+    case 8
+        Data = Data(:,7);
+    case 9
+        Data = Data(:,8);
+    case 10
+        Data = Data(:,9);
+    case 11
+        Data = Data(:,10);
+    case 12
+        Data = Data(:,11);
+    case 13
+        Data = Data(:,12);
+    case 14
+        Data = Data(:,13);
+    case 15
+        Data = Data(:,14);
+    case 16
+        Data = Data(:,15);
+    case 17
+        Data = Data(:,16);
+end
+if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
+   disp("Error!");
+   return;
 end
 handles.Data1 = Data;
 guidata(hObject, handles);  % Store updated handles struct in the GUI
@@ -167,9 +243,41 @@ fclose(fid);
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
-        Data = Data(11,1);
+        Data = Data(:,1);
     case 3
-        Data = Data(11,2);
+        Data = Data(:,2);
+    case 4
+        Data = Data(:,3);
+    case 5
+        Data = Data(:,4);
+    case 6
+        Data = Data(:,5);
+    case 7
+        Data = Data(:,6);
+    case 8
+        Data = Data(:,7);
+    case 9
+        Data = Data(:,8);
+    case 10
+        Data = Data(:,9);
+    case 11
+        Data = Data(:,10);
+    case 12
+        Data = Data(:,11);
+    case 13
+        Data = Data(:,12);
+    case 14
+        Data = Data(:,13);
+    case 15
+        Data = Data(:,14);
+    case 16
+        Data = Data(:,15);
+    case 17
+        Data = Data(:,16);        
+end
+if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
+   disp("Error!"); 
+   return;
 end
 handles.Data2 = Data;
 guidata(hObject, handles);
@@ -193,8 +301,30 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-Data_1 = handles.Data1;
-Data_2 = handles.Data2;
-Contrast = [Data_1,Data_2];
-disp(Contrast);
-pie(Contrast);
+set(gcf,'color','default');
+
+Data_TeamA = handles.Data1;
+Data_TeamB = handles.Data2;
+Type_Index = get(handles.popupmenu2,'value')-1;
+TeamA_Index = get(handles.popupmenu1,'value');
+TeamB_Index = get(handles.popupmenu4,'value');
+
+Contrast_graph = [Data_TeamA(Type_Index),Data_TeamB(Type_Index)];
+Contrast_label = {num2str(Data_TeamA(Type_Index)),num2str(Data_TeamB(Type_Index))};
+Contrast_title = handles.TypeName(Type_Index);
+Contrast_legend = {handles.TeamName(TeamA_Index),handles.TeamName(TeamB_Index)};
+
+pie3(Contrast_graph,Contrast_label);
+title(Contrast_title);
+
+%---------------------------總冠軍判斷----------------------------------
+if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
+set(gcf,'color','#FFFFE0');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function text2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
