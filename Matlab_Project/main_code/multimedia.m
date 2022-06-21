@@ -127,7 +127,7 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %if ~ischar(filename)
  %   return;  % User aborted the file selection
 %end
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
 [fid, msg] = fopen(file, 'r');
 if fid == -1
     error(msg);
@@ -135,7 +135,23 @@ end
 Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
 fclose(fid);
 
-A = imread('Team_logo\minnesota_timberwolves.png');
+Img_atlanta_hawks = imread('Team_logo\atlanta_hawks.png');
+Img_boston_celtics = imread('Team_logo\boston_celtics.png');
+Img_brooklyn_nets = imread('Team_logo\brooklyn_nets.png');
+Img_chicago_bulls = imread('Team_logo\chicago_bulls.png');
+Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png');
+Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
+Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png');
+Img_memphis_grizzlies = imread('Team_logo\memphis_grizzlies.png');
+Gif_miami_heat = imread('Team_logo\miami_heat.gif');
+Img_miami_heat = imread('Team_logo\miami_heat.png');
+Img_milwaukee_bucks = imread('Team_logo\milwaukee_bucks.png');
+Img_minnesota_timberwolves = imread('Team_logo\minnesota_timberwolves.png');
+Img_new_orleans_pelicans = imread('Team_logo\new_orleans_pelicans.png');
+Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
+Img_phoenix_suns = imread('Team_logo\phoenix_suns.png');
+Img_toronto_raptors = imread('Team_logo\toronto_raptors.png');
+Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
@@ -233,13 +249,31 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns popupmenu4 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from popupmenu4
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
 [fid, msg] = fopen(file, 'r');
 if fid == -1
     error(msg);
 end
 Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
 fclose(fid);
+
+Img_atlanta_hawks = imread('Team_logo\atlanta_hawks.png');
+Img_boston_celtics = imread('Team_logo\boston_celtics.png');
+Img_brooklyn_nets = imread('Team_logo\brooklyn_nets.png');
+Img_chicago_bulls = imread('Team_logo\chicago_bulls.png');
+Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png');
+Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
+Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png');
+Img_memphis_grizzlies = imread('Team_logo\memphis_grizzlies.png');
+Gif_miami_heat = imread('Team_logo\miami_heat.gif');
+Img_miami_heat = imread('Team_logo\miami_heat.png');
+Img_milwaukee_bucks = imread('Team_logo\milwaukee_bucks.png');
+Img_minnesota_timberwolves = imread('Team_logo\minnesota_timberwolves.png');
+Img_new_orleans_pelicans = imread('Team_logo\new_orleans_pelicans.png');
+Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
+Img_phoenix_suns = imread('Team_logo\phoenix_suns.png');
+Img_toronto_raptors = imread('Team_logo\toronto_raptors.png');
+Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			
@@ -322,7 +356,7 @@ legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Inde
 
 %---------------------------總冠軍判斷----------------------------------
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
-set(gcf,'color','#FFFFE0');
+set(gcf,'color','#d5e8b0');
 end
 
 
