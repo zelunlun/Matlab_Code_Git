@@ -54,7 +54,8 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for multimedia
 handles.output = hObject;
-
+handles.axes1 = set(handles.axes1,'visible','off');
+handles.TeamName = {''};
 % Update handles structure
 guidata(hObject, handles);
 
@@ -96,9 +97,41 @@ fclose(fid);
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
-        Data = Data(11,1);
+        Data = Data(:,1);
     case 3
-        Data = Data(11,2);
+        Data = Data(:,2);
+    case 4
+        Data = Data(:,3);
+    case 5
+        Data = Data(:,4);
+    case 6
+        Data = Data(:,5);
+    case 7
+        Data = Data(:,6);
+    case 8
+        Data = Data(:,7);
+    case 9
+        Data = Data(:,8);
+    case 10
+        Data = Data(:,9);
+    case 11
+        Data = Data(:,10);
+    case 12
+        Data = Data(:,11);
+    case 13
+        Data = Data(:,12);
+    case 14
+        Data = Data(:,13);
+    case 15
+        Data = Data(:,14);
+    case 16
+        Data = Data(:,15);
+    case 17
+        Data = Data(:,16);
+end
+if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
+   disp("Error!");
+   return;
 end
 handles.Data1 = Data;
 guidata(hObject, handles);  % Store updated handles struct in the GUI
@@ -167,9 +200,41 @@ fclose(fid);
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
-        Data = Data(11,1);
+        Data = Data(:,1);
     case 3
-        Data = Data(11,2);
+        Data = Data(:,2);
+    case 4
+        Data = Data(:,3);
+    case 5
+        Data = Data(:,4);
+    case 6
+        Data = Data(:,5);
+    case 7
+        Data = Data(:,6);
+    case 8
+        Data = Data(:,7);
+    case 9
+        Data = Data(:,8);
+    case 10
+        Data = Data(:,9);
+    case 11
+        Data = Data(:,10);
+    case 12
+        Data = Data(:,11);
+    case 13
+        Data = Data(:,12);
+    case 14
+        Data = Data(:,13);
+    case 15
+        Data = Data(:,14);
+    case 16
+        Data = Data(:,15);
+    case 17
+        Data = Data(:,16);        
+end
+if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
+   disp("Error!"); 
+   return;
 end
 handles.Data2 = Data;
 guidata(hObject, handles);
@@ -193,8 +258,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-Data_1 = handles.Data1;
-Data_2 = handles.Data2;
-Contrast = [Data_1,Data_2];
-disp(Contrast);
-pie(Contrast);
+Data_TeamA = handles.Data1;
+Data_TeamB = handles.Data2;
+Data_Type = get(handles.popupmenu2,'value')-1;
+
+Contrast_graph = [Data_TeamA(Data_Type),Data_TeamB(Data_Type)];
+Contrast_label = {num2str(Data_TeamA(Data_Type)),num2str(Data_TeamB(Data_Type))};
+
+pie(Contrast_graph,Contrast_label);
