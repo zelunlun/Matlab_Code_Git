@@ -55,6 +55,8 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for multimedia
 handles.output = hObject;
 handles.axes1 = set(handles.axes1,'visible','off');
+%handles.axes4 = set(handles.axes4,'visible','off');
+%handles.axes5 = set(handles.axes5,'visible','off');
 set(gcf,'color',[1 1 1]);
 
 handles.TeamName = {'Memphis Grizzlies',...
@@ -129,19 +131,15 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %if ~ischar(filename)
  %   return;  % User aborted the file selection
 %end
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
-[fid, msg] = fopen(file, 'r');
-if fid == -1
-    error(msg);
-end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
-fclose(fid);
+filename = 'Matlab_Project1.txt';
+delimiterIn = ' ';
+Data = importdata(filename,delimiterIn);
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
 [brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
-%[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
-Img_chicago_bulls = imread('Team_logo\chicago_bulls.png');
+[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
+
 Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
 Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
@@ -155,8 +153,9 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 
-value=get(hObject, 'value');	% 取得此 UI 物件的選項
+value=get(hObject, 'value');
 switch value			
     case 2
         Data = Data(:,1);
@@ -205,8 +204,7 @@ switch value
         imshow(atlanta_hawks_indexed,atlanta_hawks_map,'Parent',handles.axes2);
     case 17
         Data = Data(:,16);
-        Img_chicago_bulls imshow(Img_utah_jazz,'Parent',handles.axes2);
-        %imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes2);
+        imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes2);
     case 18
         Data = Data(:,17);
         imshow(Img_nba_logo,'Parent',handles.axes2);
@@ -271,15 +269,9 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu4 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu4
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
-[fid, msg] = fopen(file, 'r');
-if fid == -1
-    error(msg);
-end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]); 
-fclose(fid);
+filename = 'Matlab_Project1.txt';
+delimiterIn = ' ';
+Data = importdata(filename,delimiterIn);
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); 
@@ -297,16 +289,17 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
+Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 
-
-value=get(hObject, 'value');	% 取得此 UI 物件的選項
+value=get(hObject, 'value');
 switch value			
     case 2
         Data = Data(:,1);
-        imshow(Img_memphis_grizzlies,[],'Parent',handles.axes3);
+        imshow(Img_memphis_grizzlies,'Parent',handles.axes3);
     case 3
         Data = Data(:,2);
-        imshow(Img_golden_state_warriors,[],'Parent',handles.axes3);
+        imshow(Img_golden_state_warriors,'Parent',handles.axes3);
     case 4
         Data = Data(:,3);
         imshow(Img_denver_nuggets,'Parent',handles.axes3);
@@ -349,6 +342,9 @@ switch value
     case 17
         Data = Data(:,16);
         imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes3);
+    case 18
+        Data = Data(:,17);
+        imshow(Img_nba_logo,'Parent',handles.axes3);    
 end
 if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
    set(handles.text4,'Visible','on','String','Error!'); 
@@ -381,8 +377,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 %---------------------------設定按下按鈕----------------------------------
 %---------------------------後的初始狀態----------------------------------
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 set(gcf,'color',[1 1 1]);
-
+axis.axes4);
+clf(handles.axes5);
 %---------------------------設定資料變數----------------------------------
 Data_TeamA = handles.Data1;
 Data_TeamB = handles.Data2;
@@ -408,13 +406,14 @@ legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Inde
 %---------------------------總冠軍判斷----------------------------------
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
 set(gcf,'color','#d5e8b0');
+imshow(Img_cup_logo,'Parent',handles.axes4);
 %  Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[0 1 0]);
 %  ↑改變圖片背景顏色，不然會是白的
 %  imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
 %  ↑改變圖片背景顏色，不然會是白的
-
 elseif get(handles.popupmenu1,'value') == 10 && get(handles.popupmenu4,'value') == 3
 set(gcf,'color','#d5e8b0');
+imshow(Img_cup_logo,'Parent',handles.axes5);
 end
 
 

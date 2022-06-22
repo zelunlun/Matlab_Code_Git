@@ -55,6 +55,7 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for multimedia
 handles.output = hObject;
 handles.axes1 = set(handles.axes1,'visible','off');
+
 set(gcf,'color',[1 1 1]);
 
 handles.TeamName = {'Memphis Grizzlies',...
@@ -151,8 +152,9 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 
-value=get(hObject, 'value');	% 取得此 UI 物件的選項
+value=get(hObject, 'value');
 switch value			
     case 2
         Data = Data(:,1);
@@ -287,16 +289,16 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 
-
-value=get(hObject, 'value');	% 取得此 UI 物件的選項
+value=get(hObject, 'value');
 switch value			
     case 2
         Data = Data(:,1);
-        imshow(Img_memphis_grizzlies,[],'Parent',handles.axes3);
+        imshow(Img_memphis_grizzlies,'Parent',handles.axes3);
     case 3
         Data = Data(:,2);
-        imshow(Img_golden_state_warriors,[],'Parent',handles.axes3);
+        imshow(Img_golden_state_warriors,'Parent',handles.axes3);
     case 4
         Data = Data(:,3);
         imshow(Img_denver_nuggets,'Parent',handles.axes3);
@@ -399,15 +401,17 @@ title(Contrast_title);
 legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Index))},'Location','southoutside');
 
 %---------------------------總冠軍判斷----------------------------------
+Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
-set(gcf,'color','#d5e8b0');
+set(gcf,'color','#f58c4e');
+imshow(Img_cup_logo,'Parent',handles.axes4);
 %  Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[0 1 0]);
 %  ↑改變圖片背景顏色，不然會是白的
 %  imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
 %  ↑改變圖片背景顏色，不然會是白的
-
 elseif get(handles.popupmenu1,'value') == 10 && get(handles.popupmenu4,'value') == 3
-set(gcf,'color','#d5e8b0');
+set(gcf,'color','#f58c4e');
+imshow(Img_cup_logo,'Parent',handles.axes5);
 end
 
 
