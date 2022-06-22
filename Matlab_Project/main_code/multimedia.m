@@ -129,18 +129,15 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %if ~ischar(filename)
  %   return;  % User aborted the file selection
 %end
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
-[fid, msg] = fopen(file, 'r');
-if fid == -1
-    error(msg);
-end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
-fclose(fid);
+filename = 'Matlab_Project1.txt';
+delimiterIn = ' ';
+Data = importdata(filename,delimiterIn);
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
 [brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
 [chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
+
 Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
 Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
@@ -153,15 +150,16 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);%problem still exist.
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
+Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
-switch value			% 依選項來載入聲音檔
+switch value			
     case 2
         Data = Data(:,1);
-        imshow(Img_memphis_grizzlies,[],'Parent',handles.axes2);
+        imshow(Img_memphis_grizzlies,'Parent',handles.axes2);
     case 3
         Data = Data(:,2);
-        imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
+        imshow(Img_golden_state_warriors,'Parent',handles.axes2);
     case 4
         Data = Data(:,3);
         imshow(Img_denver_nuggets,'Parent',handles.axes2);
@@ -204,6 +202,9 @@ switch value			% 依選項來載入聲音檔
     case 17
         Data = Data(:,16);
         imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes2);
+    case 18
+        Data = Data(:,17);
+        imshow(Img_nba_logo,'Parent',handles.axes2);
 end
 if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
    set(handles.text4,'visible','on','String','Error!'); 
@@ -265,15 +266,9 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu4 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from popupmenu4
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
-[fid, msg] = fopen(file, 'r');
-if fid == -1
-    error(msg);
-end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]); 
-fclose(fid);
+filename = 'Matlab_Project1.txt';
+delimiterIn = ' ';
+Data = importdata(filename,delimiterIn);
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); 
@@ -291,6 +286,7 @@ Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
 [phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);
 [toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
+Img_nba_logo = imread('Team_logo\nba_logo.png','BackgroundColor',[1 1 1]);
 
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
@@ -343,6 +339,9 @@ switch value
     case 17
         Data = Data(:,16);
         imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes3);
+    case 18
+        Data = Data(:,17);
+        imshow(Img_nba_logo,'Parent',handles.axes3);    
 end
 if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
    set(handles.text4,'Visible','on','String','Error!'); 
@@ -390,6 +389,11 @@ Contrast_label = {num2str(Data_TeamA(Type_Index)),num2str(Data_TeamB(Type_Index)
 Contrast_title = handles.TypeName(Type_Index);
 
 %---------------------------作圖---------------------------------------
+if Data_TeamA(Type_Index)+Data_TeamB(Type_Index) < 1
+A = Data_TeamA(Type_Index) / Data_TeamA(Type_Index)+Data_TeamB(Type_Index);
+B = Data_TeamB(Type_Index) / Data_TeamA(Type_Index)+Data_TeamB(Type_Index);
+Contrast_graph = [A,B];
+end
 pie(Contrast_graph,Contrast_label);
 title(Contrast_title);
 legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Index))},'Location','southoutside');
