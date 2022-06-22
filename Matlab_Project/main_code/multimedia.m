@@ -56,6 +56,7 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 handles.axes1 = set(handles.axes1,'visible','off');
 set(gcf,'color',[1 1 1]);
+
 handles.TeamName = {'Memphis Grizzlies',...
 'Golden State Warriors',...
 'Denver Nuggets',...
@@ -271,28 +272,29 @@ file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Proje
 if fid == -1
     error(msg);
 end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
+Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]); 
 fclose(fid);
 
-[atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
-[boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
-[brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
-[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
+[atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);
+[boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); 
+[brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); 
+[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);
 Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
 Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
 Img_memphis_grizzlies = imread('Team_logo\memphis_grizzlies.png');
 Img_miami_heat = imread('Team_logo\miami_heat.png','BackgroundColor',[1 1 1]);
-[milwaukee_bucks_indexed,milwaukee_bucks_map] = imread('Team_logo\milwaukee_bucks.png','BackgroundColor',[1 1 1]);%problem still exist.
+[milwaukee_bucks_indexed,milwaukee_bucks_map] = imread('Team_logo\milwaukee_bucks.png','BackgroundColor',[1 1 1]);
 Img_minnesota_timberwolves = imread('Team_logo\minnesota_timberwolves.png');
 Img_new_orleans_pelicans = imread('Team_logo\new_orleans_pelicans.png');
 Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
-[phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);%problem still exist.
-[toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
+[phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);
+[toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 
+
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
-switch value			% 依選項來載入聲音檔
+switch value			
     case 2
         Data = Data(:,1);
         imshow(Img_memphis_grizzlies,[],'Parent',handles.axes3);
@@ -370,27 +372,36 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%---------------------------設定按下按鈕----------------------------------
+%---------------------------後的初始狀態----------------------------------
 set(gcf,'color',[1 1 1]);
 
+%---------------------------設定資料變數----------------------------------
 Data_TeamA = handles.Data1;
 Data_TeamB = handles.Data2;
 Type_Index = get(handles.popupmenu2,'value')-1;
 TeamA_Index = get(handles.popupmenu1,'value')-1;
 TeamB_Index = get(handles.popupmenu4,'value')-1;
 
+%---------------------------設定作圖變數----------------------------------
 Contrast_graph = [Data_TeamA(Type_Index),Data_TeamB(Type_Index)];
 Contrast_label = {num2str(Data_TeamA(Type_Index)),num2str(Data_TeamB(Type_Index))};
 Contrast_title = handles.TypeName(Type_Index);
 
-
+%---------------------------作圖---------------------------------------
 pie(Contrast_graph,Contrast_label);
 title(Contrast_title);
-
 legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Index))},'Location','southoutside');
 
 %---------------------------總冠軍判斷----------------------------------
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
 set(gcf,'color','#d5e8b0');
+%  Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[0 1 0]);
+%  ↑改變圖片背景顏色，不然會是白的
+%  imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
+%  ↑改變圖片背景顏色，不然會是白的
+
 elseif get(handles.popupmenu1,'value') == 10 && get(handles.popupmenu4,'value') == 3
 set(gcf,'color','#d5e8b0');
 end
