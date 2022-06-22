@@ -22,7 +22,7 @@ function varargout = multimedia(varargin)
 
 % Edit the above text to modify the response to help multimedia
 
-% Last Modified by GUIDE v2.5 21-Jun-2022 19:23:05
+% Last Modified by GUIDE v2.5 22-Jun-2022 09:51:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,6 +55,7 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for multimedia
 handles.output = hObject;
 handles.axes1 = set(handles.axes1,'visible','off');
+set(gcf,'color',[1 1 1]);
 handles.TeamName = {'Memphis Grizzlies',...
 'Golden State Warriors',...
 'Denver Nuggets',...
@@ -127,7 +128,7 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %if ~ischar(filename)
  %   return;  % User aborted the file selection
 %end
-file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
 [fid, msg] = fopen(file, 'r');
 if fid == -1
     error(msg);
@@ -135,63 +136,79 @@ end
 Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
 fclose(fid);
 
-Img_atlanta_hawks = imread('Team_logo\atlanta_hawks.png');
-Img_boston_celtics = imread('Team_logo\boston_celtics.png');
-Img_brooklyn_nets = imread('Team_logo\brooklyn_nets.png');
-Img_chicago_bulls = imread('Team_logo\chicago_bulls.png');
-Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png');
+[atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
+[boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
+[brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
+[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
+Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
-Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png');
+Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
 Img_memphis_grizzlies = imread('Team_logo\memphis_grizzlies.png');
-Gif_miami_heat = imread('Team_logo\miami_heat.gif');
-Img_miami_heat = imread('Team_logo\miami_heat.png');
-Img_milwaukee_bucks = imread('Team_logo\milwaukee_bucks.png');
+Img_miami_heat = imread('Team_logo\miami_heat.png','BackgroundColor',[1 1 1]);
+[milwaukee_bucks_indexed,milwaukee_bucks_map] = imread('Team_logo\milwaukee_bucks.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_minnesota_timberwolves = imread('Team_logo\minnesota_timberwolves.png');
 Img_new_orleans_pelicans = imread('Team_logo\new_orleans_pelicans.png');
 Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
-Img_phoenix_suns = imread('Team_logo\phoenix_suns.png');
-Img_toronto_raptors = imread('Team_logo\toronto_raptors.png');
+[phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);%problem still exist.
+[toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
 switch value			% 依選項來載入聲音檔
     case 2
         Data = Data(:,1);
-        imshow(A,'Parent',handles.axes2);
+        imshow(Img_memphis_grizzlies,[],'Parent',handles.axes2);
     case 3
         Data = Data(:,2);
+        imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
     case 4
         Data = Data(:,3);
+        imshow(Img_denver_nuggets,'Parent',handles.axes2);
     case 5
         Data = Data(:,4);
+        imshow(Img_new_orleans_pelicans,'Parent',handles.axes2);
     case 6
         Data = Data(:,5);
+        imshow(Img_minnesota_timberwolves,'Parent',handles.axes2);
     case 7
         Data = Data(:,6);
+        imshow(brooklyn_netss_indexed,brooklyn_nets_map,'Parent',handles.axes2);
     case 8
         Data = Data(:,7);
+        imshow(phoenix_suns_indexed,phoenix_suns_map,'Parent',handles.axes2);
     case 9
         Data = Data(:,8);
+        imshow(Img_dallas_mavericks,'Parent',handles.axes2);
     case 10
         Data = Data(:,9);
+        imshow(boston_celtics_indexed,boston_celtics_map,'Parent',handles.axes2);
     case 11
         Data = Data(:,10);
+        imshow(Img_philadelphia_76ers,'Parent',handles.axes2);
     case 12
         Data = Data(:,11);
+        imshow(Img_miami_heat,'Parent',handles.axes2);
     case 13
         Data = Data(:,12);
+        imshow(toronto_raptors_indexed,toronto_raptors_map,'Parent',handles.axes2);
     case 14
         Data = Data(:,13);
+        imshow(milwaukee_bucks_indexed,milwaukee_bucks_map,'Parent',handles.axes2);
     case 15
         Data = Data(:,14);
+        imshow(Img_utah_jazz,'Parent',handles.axes2);
     case 16
         Data = Data(:,15);
+        imshow(atlanta_hawks_indexed,atlanta_hawks_map,'Parent',handles.axes2);
     case 17
         Data = Data(:,16);
+        imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes2);
 end
 if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
-   disp("Error!");
-   return;
+   set(handles.text4,'visible','on','String','Error!'); 
+   Data = [];
+else
+    set(handles.text4,'visible','off'); 
 end
 handles.Data1 = Data;
 guidata(hObject, handles);  % Store updated handles struct in the GUI
@@ -249,7 +266,7 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns popupmenu4 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from popupmenu4
-file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
 [fid, msg] = fopen(file, 'r');
 if fid == -1
     error(msg);
@@ -257,62 +274,79 @@ end
 Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
 fclose(fid);
 
-Img_atlanta_hawks = imread('Team_logo\atlanta_hawks.png');
-Img_boston_celtics = imread('Team_logo\boston_celtics.png');
-Img_brooklyn_nets = imread('Team_logo\brooklyn_nets.png');
-Img_chicago_bulls = imread('Team_logo\chicago_bulls.png');
-Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png');
+[atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
+[boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
+[brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
+[chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
+Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
-Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png');
+Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
 Img_memphis_grizzlies = imread('Team_logo\memphis_grizzlies.png');
-Gif_miami_heat = imread('Team_logo\miami_heat.gif');
-Img_miami_heat = imread('Team_logo\miami_heat.png');
-Img_milwaukee_bucks = imread('Team_logo\milwaukee_bucks.png');
+Img_miami_heat = imread('Team_logo\miami_heat.png','BackgroundColor',[1 1 1]);
+[milwaukee_bucks_indexed,milwaukee_bucks_map] = imread('Team_logo\milwaukee_bucks.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_minnesota_timberwolves = imread('Team_logo\minnesota_timberwolves.png');
 Img_new_orleans_pelicans = imread('Team_logo\new_orleans_pelicans.png');
 Img_philadelphia_76ers = imread('Team_logo\philadelphia_76ers.png');
-Img_phoenix_suns = imread('Team_logo\phoenix_suns.png');
-Img_toronto_raptors = imread('Team_logo\toronto_raptors.png');
+[phoenix_suns_indexed,phoenix_suns_map] = imread('Team_logo\phoenix_suns.png','BackgroundColor',[1 1 1]);%problem still exist.
+[toronto_raptors_indexed,toronto_raptors_map] = imread('Team_logo\toronto_raptors.png','BackgroundColor',[1 1 1]);%problem still exist.
 Img_utah_jazz = imread('Team_logo\utah_jazz.png');
 
 value=get(hObject, 'value');	% 取得此 UI 物件的選項
-switch value			
+switch value			% 依選項來載入聲音檔
     case 2
         Data = Data(:,1);
+        imshow(Img_memphis_grizzlies,[],'Parent',handles.axes3);
     case 3
         Data = Data(:,2);
+        imshow(Img_golden_state_warriors,[],'Parent',handles.axes3);
     case 4
         Data = Data(:,3);
+        imshow(Img_denver_nuggets,'Parent',handles.axes3);
     case 5
         Data = Data(:,4);
+        imshow(Img_new_orleans_pelicans,'Parent',handles.axes3);
     case 6
         Data = Data(:,5);
+        imshow(Img_minnesota_timberwolves,'Parent',handles.axes3);
     case 7
         Data = Data(:,6);
+        imshow(brooklyn_netss_indexed,brooklyn_nets_map,'Parent',handles.axes3);
     case 8
         Data = Data(:,7);
+        imshow(phoenix_suns_indexed,phoenix_suns_map,'Parent',handles.axes3);
     case 9
         Data = Data(:,8);
+        imshow(Img_dallas_mavericks,'Parent',handles.axes3);
     case 10
         Data = Data(:,9);
+        imshow(boston_celtics_indexed,boston_celtics_map,'Parent',handles.axes3);
     case 11
         Data = Data(:,10);
+        imshow(Img_philadelphia_76ers,'Parent',handles.axes3);
     case 12
         Data = Data(:,11);
+        imshow(Img_miami_heat,'Parent',handles.axes3);
     case 13
         Data = Data(:,12);
+        imshow(toronto_raptors_indexed,toronto_raptors_map,'Parent',handles.axes3);
     case 14
         Data = Data(:,13);
+        imshow(milwaukee_bucks_indexed,milwaukee_bucks_map,'Parent',handles.axes3);
     case 15
         Data = Data(:,14);
+        imshow(Img_utah_jazz,'Parent',handles.axes3);
     case 16
         Data = Data(:,15);
+        imshow(atlanta_hawks_indexed,atlanta_hawks_map,'Parent',handles.axes3);
     case 17
-        Data = Data(:,16);        
+        Data = Data(:,16);
+        imshow(chicago_bulls_indexed,chicago_bulls_map,'Parent',handles.axes3);
 end
 if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
-   disp("Error!"); 
-   return;
+   set(handles.text4,'Visible','on','String','Error!'); 
+   Data = [];
+else
+    set(handles.text4,'visible','off'); 
 end
 handles.Data2 = Data;
 guidata(hObject, handles);
@@ -336,7 +370,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-set(gcf,'color','default');
+set(gcf,'color',[1 1 1]);
 
 Data_TeamA = handles.Data1;
 Data_TeamB = handles.Data2;
@@ -356,6 +390,8 @@ legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Inde
 
 %---------------------------總冠軍判斷----------------------------------
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
+set(gcf,'color','#d5e8b0');
+elseif get(handles.popupmenu1,'value') == 10 && get(handles.popupmenu4,'value') == 3
 set(gcf,'color','#d5e8b0');
 end
 
