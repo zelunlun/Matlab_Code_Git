@@ -25,7 +25,7 @@ function varargout = multimedia(varargin)
 % Last Modified by GUIDE v2.5 22-Jun-2022 09:51:40
 
 % Begin initialization code - DO NOT EDIT
-gui_Singleton = 1;
+gui_Singleton = 1; 
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
                    'gui_OpeningFcn', @multimedia_OpeningFcn, ...
@@ -54,10 +54,10 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for multimedia
 handles.output = hObject;
-handles.axes1 = set(handles.axes1,'visible','off');
-set(handles.axes4,'visible','off');
+handles.axes1 = set(handles.axes1,'visible','off');% 讓圓餅圖圖軸隱藏
+set(handles.axes4,'visible','off'); % 讓冠軍獎盃圖軸隱藏
 set(handles.axes5,'visible','off');
-set(gcf,'color',[1 1 1]);
+set(gcf,'color',[1 1 1]);% 背景顏色變白色
 
 handles.TeamName = {'Memphis Grizzlies',...
 'Golden State Warriors',...
@@ -136,15 +136,15 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %delimiterIn = ' ';
 %Data = importdata(filename,delimiterIn);
 
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
-[fid, msg] = fopen(file, 'r');
+file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+[fid, msg] = fopen(file, 'r');% 打開檔案，r讀取
 if fid == -1
     error(msg);
 end
-Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
+Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % 一行23組數字
 fclose(fid);
 
-
+% 讀取圖片、設定圖片變數
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
 [brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
@@ -168,7 +168,7 @@ value=get(hObject, 'value');
 switch value			
     case 2
         Data = Data(:,1);
-        imshow(Img_memphis_grizzlies,'Parent',handles.axes2);
+        imshow(Img_memphis_grizzlies,'Parent',handles.axes2);% 顯示logo
     case 3
         Data = Data(:,2);
         imshow(Img_golden_state_warriors,'Parent',handles.axes2);
@@ -218,7 +218,7 @@ switch value
         Data = Data(:,17);
         imshow(Img_nba_logo,'Parent',handles.axes2);
 end
-if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value')
+if get(handles.popupmenu4,'value')==get(handles.popupmenu1,'value') % 如果兩隊相同，則顯示Error
    set(handles.text4,'visible','on','String','Error!'); 
    Data = [];
 else
@@ -282,7 +282,7 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 %delimiterIn = ' ';
 %Data = importdata(filename,delimiterIn);
 
-file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+file = fullfile('C:\Users\isu10903011a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
 [fid, msg] = fopen(file, 'r');
 if fid == -1
     error(msg);
@@ -396,13 +396,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %---------------------------設定按下按鈕----------------------------------
 %---------------------------後的初始狀態----------------------------------
 set(gcf,'color',[1 1 1]);
-set(get(handles.axes4,'children'),'visible','off'); %hide the current axes contents
+set(get(handles.axes4,'children'),'visible','off'); % 冠軍獎盃圖軸重置
 set(get(handles.axes5,'children'),'visible','off');
 
 %---------------------------設定資料變數----------------------------------
 Data_TeamA = handles.Data1;
 Data_TeamB = handles.Data2;
-Type_Index = get(handles.popupmenu2,'value')-1;
+Type_Index = get(handles.popupmenu2,'value')-1;% 下拉式選單第一格為空白
 TeamA_Index = get(handles.popupmenu1,'value')-1;
 TeamB_Index = get(handles.popupmenu4,'value')-1;
 
@@ -412,20 +412,20 @@ Contrast_label = {num2str(Data_TeamA(Type_Index)),num2str(Data_TeamB(Type_Index)
 Contrast_title = handles.TypeName(Type_Index);
 
 %---------------------------作圖---------------------------------------
-if Data_TeamA(Type_Index)+Data_TeamB(Type_Index) < 1
+if Data_TeamA(Type_Index)+Data_TeamB(Type_Index) < 1% 數據資料<1，以分子/分母解決
 A = Data_TeamA(Type_Index) / Data_TeamA(Type_Index)+Data_TeamB(Type_Index);
 B = Data_TeamB(Type_Index) / Data_TeamA(Type_Index)+Data_TeamB(Type_Index);
 Contrast_graph = [A,B];
 end
-pie(Contrast_graph,Contrast_label);
-title(Contrast_title);
-legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Index))},'Location','southoutside');
+pie(Contrast_graph,Contrast_label);% 畫圓餅圖
+title(Contrast_title);% 標題
+legend({string(handles.TeamName(TeamA_Index)),string(handles.TeamName(TeamB_Index))},'Location','southoutside');% 圖例
 
 %---------------------------總冠軍判斷----------------------------------
 Img_cup_logo = imread('Team_logo\cup.png','BackgroundColor',[1 1 1]);
 if get(handles.popupmenu1,'value') == 3 && get(handles.popupmenu4,'value') == 10
-set(gcf,'color','#f58c4e');
-imshow(Img_cup_logo,'Parent',handles.axes4);
+set(gcf,'color','#f58c4e');% 改變冠軍背景顏色
+imshow(Img_cup_logo,'Parent',handles.axes4);% 顯示冠軍獎盃
 %  Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[0 1 0]);
 %  ↑改變圖片背景顏色，不然會是白的
 %  imshow(Img_golden_state_warriors,[],'Parent',handles.axes2);
