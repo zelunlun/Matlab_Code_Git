@@ -55,7 +55,8 @@ function multimedia_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for multimedia
 handles.output = hObject;
 handles.axes1 = set(handles.axes1,'visible','off');
-
+set(handles.axes4,'visible','off');
+set(handles.axes5,'visible','off');
 set(gcf,'color',[1 1 1]);
 
 handles.TeamName = {'Memphis Grizzlies',...
@@ -130,15 +131,24 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 %if ~ischar(filename)
  %   return;  % User aborted the file selection
 %end
-filename = 'Matlab_Project1.txt';
-delimiterIn = ' ';
-Data = importdata(filename,delimiterIn);
+
+%filename = 'Matlab_Project1.txt';
+%delimiterIn = ' ';
+%Data = importdata(filename,delimiterIn);
+
+file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+[fid, msg] = fopen(file, 'r');
+if fid == -1
+    error(msg);
+end
+Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
+fclose(fid);
+
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);%problem still exist.
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); %problem still exist.
 [brooklyn_netss_indexed,brooklyn_nets_map] = imread('Team_logo\brooklyn_nets.png','BackgroundColor',[1 1 1]); %problem still exist.
 [chicago_bulls_indexed,chicago_bulls_map] = imread('Team_logo\chicago_bulls.png','BackgroundColor',[1 1 1]);%problem still exist.
-
 Img_dallas_mavericks = imread('Team_logo\dallas_mavericks.png','BackgroundColor',[1 1 1]);
 Img_denver_nuggets = imread('Team_logo\denver_nuggets.png');
 Img_golden_state_warriors = imread('Team_logo\golden_state_warriors.png','BackgroundColor',[1 1 1]);
@@ -268,9 +278,18 @@ function popupmenu4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-filename = 'Matlab_Project1.txt';
-delimiterIn = ' ';
-Data = importdata(filename,delimiterIn);
+%filename = 'Matlab_Project1.txt';
+%delimiterIn = ' ';
+%Data = importdata(filename,delimiterIn);
+
+file = fullfile('C:\Users\isu10903027a\Desktop\Matlab_Code_Git-main\Matlab_Project\main_code', 'Matlab_Project1.txt');
+[fid, msg] = fopen(file, 'r');
+if fid == -1
+    error(msg);
+end
+Data = fscanf(fid, '%g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g %g\n', [23, inf]);  % Or how your file is formatted
+fclose(fid);
+
 
 [atlanta_hawks_indexed,atlanta_hawks_map] = imread('Team_logo\atlanta_hawks.png','BackgroundColor',[1 1 1]);
 [boston_celtics_indexed,boston_celtics_map] = imread('Team_logo\boston_celtics.png','BackgroundColor',[1 1 1]); 
@@ -377,6 +396,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %---------------------------設定按下按鈕----------------------------------
 %---------------------------後的初始狀態----------------------------------
 set(gcf,'color',[1 1 1]);
+set(get(handles.axes4,'children'),'visible','off'); %hide the current axes contents
+set(get(handles.axes5,'children'),'visible','off');
 
 %---------------------------設定資料變數----------------------------------
 Data_TeamA = handles.Data1;
